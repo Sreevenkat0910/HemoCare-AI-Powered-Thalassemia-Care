@@ -7,11 +7,12 @@ import { PatientDashboard } from './components/PatientDashboard';
 import { DoctorDashboard } from './components/DoctorDashboard';
 import { AIPredictions } from './components/AIPredictions';
 import { DigitalTwin } from './components/DigitalTwin';
+import DonorDashboard from './components/DonorDashboard';
 import PatientLogin from './components/PatientLogin';
 import PatientRegister from './components/PatientRegister';
 import ProviderLogin from './components/ProviderLogin';
 
-type Page = 'home' | 'onboarding' | 'symptom-logging' | 'patient-dashboard' | 'doctor-dashboard' | 'ai-predictions' | 'digital-twin' | 'login' | 'register' | 'provider-login';
+type Page = 'home' | 'onboarding' | 'symptom-logging' | 'patient-dashboard' | 'doctor-dashboard' | 'ai-predictions' | 'digital-twin' | 'donor-dashboard' | 'login' | 'register' | 'provider-login';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -85,7 +86,7 @@ export default function App() {
     console.log('App: handleNavigate called with page:', page);
     
     // Check if user is trying to access protected pages
-    const protectedPages: Page[] = ['patient-dashboard', 'digital-twin', 'doctor-dashboard', 'ai-predictions'];
+    const protectedPages: Page[] = ['patient-dashboard', 'digital-twin', 'doctor-dashboard', 'ai-predictions', 'donor-dashboard'];
     
     if (protectedPages.includes(page)) {
       // Check if user is authenticated
@@ -151,6 +152,8 @@ export default function App() {
         return <AIPredictions onNavigate={handleNavigate} />;
       case 'digital-twin':
         return <DigitalTwin onNavigate={handleNavigate} />;
+      case 'donor-dashboard':
+        return <DonorDashboard />;
       case 'login':
         return <PatientLogin onNavigate={handleNavigate} requestedPage={requestedPage} currentPage={currentPage} />;
       case 'register':

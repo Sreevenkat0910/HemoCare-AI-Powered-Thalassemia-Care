@@ -146,6 +146,15 @@ export function Header({
                 Healthcare Provider
               </Button>
             )}
+            {isAuthenticated && user && user.role === 'admin' && (
+              <Button
+                variant={currentPage === 'donor-dashboard' ? 'default' : 'ghost'}
+                onClick={() => onNavigate('donor-dashboard')}
+                className="text-sm text-purple-600 hover:text-purple-700 hover:bg-purple-50"
+              >
+                Donor Management
+              </Button>
+            )}
           </nav>
         </div>
 

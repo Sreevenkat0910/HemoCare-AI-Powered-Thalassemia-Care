@@ -13,6 +13,7 @@ import userRoutes from './routes/user.routes';
 import patientRoutes from './routes/patient.routes';
 import healthRoutes from './routes/health.routes';
 import doctorRoutes from './routes/doctor.routes';
+import donorRoutes from './routes/donor.routes';
 
 // Import middleware
 import { errorHandler } from './middleware/error.middleware';
@@ -73,6 +74,7 @@ app.use('/api/users', authMiddleware, userRoutes);
 app.use('/api/patients', authMiddleware, patientRoutes);
 app.use('/api/health', authMiddleware, healthRoutes);
 app.use('/api/doctors', authMiddleware, doctorRoutes);
+app.use('/api/donors', donorRoutes);
 
 // Error handling middleware
 app.use(notFoundHandler);
