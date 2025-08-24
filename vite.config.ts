@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
+    strictPort: true, // This prevents Vite from trying other ports
     open: true
   }
 })

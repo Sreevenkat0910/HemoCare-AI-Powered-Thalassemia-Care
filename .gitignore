@@ -22,10 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Data files (large datasets)
-*.csv
-*.xlsx
-*.xls
-data/
-datasets/

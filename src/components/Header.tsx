@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Moon, Sun, Type, Languages, Menu, Bot, User, LogOut } from 'lucide-react';
-import { Switch } from './ui/switch';
+import { Languages, Menu, Bot, User, LogOut } from 'lucide-react';
+
 
 interface UserData {
   _id: string;
@@ -15,10 +15,6 @@ interface UserData {
 interface HeaderProps {
   currentPage: string;
   onNavigate: (page: string) => void;
-  isDarkMode: boolean;
-  onToggleDarkMode: () => void;
-  isLargeFont: boolean;
-  onToggleLargeFont: () => void;
   language: string;
   onLanguageChange: (language: string) => void;
 }
@@ -26,10 +22,6 @@ interface HeaderProps {
 export function Header({
   currentPage,
   onNavigate,
-  isDarkMode,
-  onToggleDarkMode,
-  isLargeFont,
-  onToggleLargeFont,
   language,
   onLanguageChange,
 }: HeaderProps) {
@@ -39,17 +31,32 @@ export function Header({
   useEffect(() => {
     // Check if user is logged in
     const checkAuth = () => {
+      // Check for regular user authentication
       const token = localStorage.getItem('authToken');
       const userData = localStorage.getItem('userData');
+      
+      // Check for blood donor authentication
+      const bloodDonorToken = localStorage.getItem('bloodDonorToken');
+      const bloodDonorData = localStorage.getItem('bloodDonorData');
       
       if (token && userData) {
         try {
           const parsedUser = JSON.parse(userData);
           setUser(parsedUser);
           setIsAuthenticated(true);
-          console.log('Header: User authenticated:', parsedUser);
+          console.log('Header: Regular user authenticated:', parsedUser);
         } catch (error) {
           console.error('Error parsing user data:', error);
+          handleSignOut();
+        }
+      } else if (bloodDonorToken && bloodDonorData) {
+        try {
+          const parsedDonor = JSON.parse(bloodDonorData);
+          setUser(parsedDonor);
+          setIsAuthenticated(true);
+          console.log('Header: Blood donor authenticated:', parsedDonor);
+        } catch (error) {
+          console.error('Error parsing blood donor data:', error);
           handleSignOut();
         }
       } else {
@@ -65,7 +72,7 @@ export function Header({
 
     // Listen for storage changes (when login/logout happens)
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'authToken' || e.key === 'userData') {
+      if (e.key === 'authToken' || e.key === 'userData' || e.key === 'bloodDonorToken' || e.key === 'bloodDonorData') {
         checkAuth();
       }
     };
@@ -73,7 +80,7 @@ export function Header({
     window.addEventListener('storage', handleStorageChange);
 
     // Also check periodically to catch any missed updates
-    const interval = setInterval(checkAuth, 1000);
+    const interval = setInterval(checkAuth, 10000); // Increased to 10 seconds to prevent loops
 
     return () => {
       window.removeEventListener('storage', handleStorageChange);
@@ -84,6 +91,8 @@ export function Header({
   const handleSignOut = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
+    localStorage.removeItem('bloodDonorToken');
+    localStorage.removeItem('bloodDonorData');
     setUser(null);
     setIsAuthenticated(false);
     onNavigate('home');
@@ -146,15 +155,20 @@ export function Header({
                 Healthcare Provider
               </Button>
             )}
-            {isAuthenticated && user && user.role === 'admin' && (
-              <Button
-                variant={currentPage === 'donor-dashboard' ? 'default' : 'ghost'}
-                onClick={() => onNavigate('donor-dashboard')}
-                className="text-sm text-purple-600 hover:text-purple-700 hover:bg-purple-50"
-              >
-                Donor Management
-              </Button>
-            )}
+            
+            {/* Blood Donor Button */}
+            <Button
+              variant="ghost"
+              onClick={() => onNavigate('blood-donor-login')}
+              className="text-sm text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
+            >
+              <div className="w-4 h-4 mr-2 text-red-600">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </div>
+              Blood Donor
+            </Button>
           </nav>
         </div>
 
@@ -174,30 +188,6 @@ export function Header({
                 <SelectItem value="ta">தமி</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-
-          {/* Font Size Toggle */}
-          <div className="flex items-center space-x-2">
-            <Type className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-            <Switch
-              checked={isLargeFont}
-              onCheckedChange={onToggleLargeFont}
-              className="data-[state=checked]:bg-blue-600"
-            />
-          </div>
-
-          {/* Dark Mode Toggle */}
-          <div className="flex items-center space-x-2">
-            {isDarkMode ? (
-              <Moon className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-            ) : (
-              <Sun className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-            )}
-            <Switch
-              checked={isDarkMode}
-              onCheckedChange={onToggleDarkMode}
-              className="data-[state=checked]:bg-blue-600"
-            />
           </div>
 
           {/* Auth Section */}

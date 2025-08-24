@@ -9,11 +9,8 @@ import dotenv from 'dotenv';
 
 // Import routes
 import authRoutes from './routes/auth.routes';
-import userRoutes from './routes/user.routes';
-import patientRoutes from './routes/patient.routes';
 import healthRoutes from './routes/health.routes';
-import doctorRoutes from './routes/doctor.routes';
-import donorRoutes from './routes/donor.routes';
+import bloodDonorRoutes from './routes/bloodDonor.routes';
 
 // Import middleware
 import { errorHandler } from './middleware/error.middleware';
@@ -27,12 +24,12 @@ import { connectDatabase } from './config/database';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5001; // Hardcoded to ensure consistency
 
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  origin: ['http://localhost:3000'],
   credentials: true
 }));
 
@@ -70,11 +67,8 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use('/api/auth', authRoutes);
-app.use('/api/users', authMiddleware, userRoutes);
-app.use('/api/patients', authMiddleware, patientRoutes);
-app.use('/api/health', authMiddleware, healthRoutes);
-app.use('/api/doctors', authMiddleware, doctorRoutes);
-app.use('/api/donors', donorRoutes);
+app.use('/api/health', healthRoutes);
+app.use('/api/blood-donors', bloodDonorRoutes);
 
 // Error handling middleware
 app.use(notFoundHandler);

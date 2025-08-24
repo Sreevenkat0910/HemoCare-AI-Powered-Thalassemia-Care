@@ -1,0 +1,1 @@
+export type Page = 'home' | 'onboarding' | 'symptom-logging' | 'patient-dashboard' | 'doctor-dashboard' | 'ai-predictions' | 'digital-twin' | 'login' | 'register' | 'provider-login' | 'blood-donor-login' | 'blood-donor-register' | 'blood-donor-dashboard';

@@ -54,10 +54,23 @@ class ApiService {
     password: string;
     firstName: string;
     lastName: string;
-    role: 'patient' | 'doctor';
-    phoneNumber?: string;
-    dateOfBirth?: string;
-    gender?: 'male' | 'female' | 'other';
+    gender: 'Male' | 'Female' | 'Other';
+    mobile: string;
+    dateOfBirth: string;
+    bloodGroup: 'A-' | 'A+' | 'O-' | 'AB-' | 'AB+' | 'B+' | 'B-';
+    city: string;
+    pincode: string;
+    role?: 'patient' | 'doctor' | 'admin' | 'Bridge Don' | 'Emergency' | 'Fighter';
+    thalassemiaType?: string;
+    diagnosisDate?: string;
+    currentMedications?: string;
+    allergies?: string;
+    previousSurgeries?: string;
+    emergencyContact?: {
+      name: string;
+      relationship: string;
+      mobile: string;
+    };
   }): Promise<ApiResponse> {
     return this.request('/api/auth/register', {
       method: 'POST',

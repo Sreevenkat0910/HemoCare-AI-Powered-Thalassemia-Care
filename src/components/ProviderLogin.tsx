@@ -100,9 +100,7 @@ const ProviderLogin: React.FC<ProviderLoginProps> = ({ onNavigate }) => {
 
         // Redirect to provider dashboard after a short delay
         setTimeout(() => {
-          // Force page refresh to update header and navigate properly
-          window.location.href = '/#doctor-dashboard';
-          window.location.reload();
+          onNavigate('doctor-dashboard');
         }, 2000);
       }
     } catch (error: any) {

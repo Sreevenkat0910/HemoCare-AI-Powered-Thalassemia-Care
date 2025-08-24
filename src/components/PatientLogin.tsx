@@ -28,7 +28,7 @@ interface PatientLoginProps {
   currentPage?: string;
 }
 
-const PatientLogin: React.FC<PatientLoginProps> = ({ onNavigate }) => {
+const PatientLogin: React.FC<PatientLoginProps> = ({ onNavigate, requestedPage, currentPage }) => {
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: ''
@@ -91,21 +91,25 @@ const PatientLogin: React.FC<PatientLoginProps> = ({ onNavigate }) => {
           text: `Welcome back, ${response.data.user.firstName}! Redirecting to Patient Portal...`
         });
 
-        // Redirect to requested page or patient portal after a short delay
-        setTimeout(() => {
-          const targetPage = requestedPage || 'patient-dashboard';
-          console.log('PatientLogin: Redirecting to:', targetPage);
-          // Navigate to the target page using the navigation function
+        // Immediate redirect attempt
+        console.log('PatientLogin: Attempting immediate redirect...');
+        const targetPage = requestedPage || 'patient-dashboard';
+        console.log('PatientLogin: Target page:', targetPage);
+        console.log('PatientLogin: onNavigate function:', typeof onNavigate);
+        
+        // Try immediate redirect first
+        try {
           onNavigate(targetPage);
-        }, 2000);
+          console.log('PatientLogin: Immediate redirect called');
+        } catch (error) {
+          console.error('PatientLogin: Immediate redirect failed:', error);
+        }
 
-        // Also try immediate redirect as backup
+        // Fallback redirect after a short delay
         setTimeout(() => {
-          if (currentPage === 'login') {
-            console.log('PatientLogin: Backup redirect to patient-dashboard');
-            onNavigate('patient-dashboard');
-          }
-        }, 3000);
+          console.log('PatientLogin: Fallback redirect to patient-dashboard');
+          onNavigate('patient-dashboard');
+        }, 1000);
       }
     } catch (error: any) {
       setMessage({
