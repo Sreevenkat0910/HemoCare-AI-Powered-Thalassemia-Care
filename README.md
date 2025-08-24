@@ -104,6 +104,43 @@ The application uses:
 4. Run tests and linting
 5. Submit a pull request
 
-## License
+Home Page
+![IMG-20250824-WA0010](https://github.com/user-attachments/assets/227f3821-1840-4112-baa5-900db078eca1)
 
-This project is licensed under the MIT License.
+AI Health Predictions Page
+![IMG-20250824-WA0005](https://github.com/user-attachments/assets/5cd36bd9-8b8f-4558-989d-e727a628e26f)
+
+AI Insights Page
+![IMG-20250824-WA0006](https://github.com/user-attachments/assets/6c59359a-300a-480d-ab01-df04824c0d73)
+
+Symptoms Logging Page
+![IMG-20250824-WA0007](https://github.com/user-attachments/assets/a6a65198-4f97-430f-a85a-3387e1a83e1a)
+
+Health Predictions Pages
+![IMG-20250824-WA0008](https://github.com/user-attachments/assets/b435ce89-9e1c-4ea8-a502-55b5e2ff7118)
+
+![IMG-20250824-WA0013](https://github.com/user-attachments/assets/e79e5ef2-2566-4e61-b1ae-08982cab694c)
+
+Risk Analysis Page
+![IMG-20250824-WA0009](https://github.com/user-attachments/assets/0fe88835-2d24-4312-a3ef-f7ea7a9536c9)
+
+All about Digital Twin
+![IMG-20250824-WA0011](https://github.com/user-attachments/assets/f5eada72-5422-4dab-9da9-392f085d12d9)
+
+![IMG-20250824-WA0012](https://github.com/user-attachments/assets/607bc166-ef65-40e2-8a7e-b2f936d2ed92)
+
+![IMG-20250824-WA0014](https://github.com/user-attachments/assets/14de3f65-95f6-4080-8315-0b960b7f8fe1)
+
+![IMG-20250824-WA0015](https://github.com/user-attachments/assets/f02c19e9-2b57-4501-a6e7-a2c2d4ff6523)
+
+![IMG-20250824-WA0019](https://github.com/user-attachments/assets/9b96056c-cbad-4c15-84e8-c632ec31158b)
+
+![IMG-20250824-WA0016](https://github.com/user-attachments/assets/9614214d-3cf1-4967-ace1-24c1ad3acb87)
+
+Blood Donor Dashboard
+![IMG-20250824-WA0017](https://github.com/user-attachments/assets/73bf3f6f-5b98-454a-a18f-f51db45754eb)
+
+Healthcare Provider Portal (Admin Portal)
+![IMG-20250824-WA0018](https://github.com/user-attachments/assets/90eca766-9b4b-4d36-8844-b853edf1b9d6)
+
+
